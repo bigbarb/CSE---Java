@@ -1,0 +1,82 @@
+// This program will print out the Space Needle, 
+// which can be modified to produce different variations
+// by changing the SIZE
+
+public class SpaceNeedle {
+    public static final int SIZE = 4;
+
+    // main method (execution of the program)
+    public static void main(String[] args) {
+       needle();
+       upperDome();
+       lowerDome();
+       needle();
+       body();
+       upperDome();
+    }
+   
+    // This method is for printing the needle
+    public static void needle(){
+        for (int i = 1; i <= SIZE; i++){
+            for (int space = 1; space <= 3 *SIZE; space++){
+                System.out.print(" ");
+            }
+            System.out.println("||");
+        }
+    }
+
+    // This method prints the upper Dome of the space needle
+    public static void upperDome(){
+        for (int i = 1; i <= SIZE; i++){
+            for (int space = 1; space <= -3 * i +3 *SIZE; space++){
+                System.out.print(" ");
+            }
+            System.out.print("__/");
+            for (int colon = 1; colon <= 3 * i - 3; colon++){
+                System.out.print(":");
+            }
+            System.out.print("||");
+            for (int colon = 1; colon <= 3 * i - 3; colon++){
+                System.out.print(":");
+            }
+            System.out.println("\\__");
+        }
+        System.out.print("|");
+        for (int quote = 1; quote <= SIZE * 6; quote++){
+            System.out.print("\"");
+        }
+        System.out.println("|");
+    }
+
+    // This method prints the lower Dome of the space needle
+    public static void lowerDome(){
+        for (int i = 1; i <= SIZE; i++){
+            for (int space = 1; space <= 2 * i -2; space++){
+                System.out.print(" ");
+            }
+            System.out.print("\\_");
+            for (int slashes = 1; slashes <= -2 * i + 3 * SIZE + 1; slashes++){
+                System.out.print("/\\");
+            }
+            System.out.println("_/");
+        }
+    }
+
+    // This method prints the body of the space needle
+    public static void body(){
+        for (int i = 1; i <= SIZE * SIZE; i++){
+            for (int space = 1; space <= SIZE * 2 + 1; space++){
+                System.out.print(" ");
+            }
+            System.out.print("|");
+            for (int percent = 1; percent <= SIZE - 2; percent++){
+                System.out.print("%");
+            }
+            System.out.print("||");
+            for (int percent = 1; percent <= SIZE - 2; percent++){
+                System.out.print("%");
+            }
+            System.out.println("|");
+        }
+    }
+}
