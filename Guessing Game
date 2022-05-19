@@ -1,0 +1,96 @@
+//This program will allow a user to play a game. The "game" will produce a random interger
+//and the user has to guess that random interger. The program will then
+//tell wheter the users guess is correct or incorrect or if they need to guess
+//higher or lower.
+
+import java.util.*;
+
+public class GuessingGame {
+    public static final int MAX_VALUE = 100;
+        
+    public static void main(String[]args) {
+
+        Scanner console = new Scanner (System.in);
+        Random random = new Random();
+
+        String response = "y";
+
+        int bestGuess = 1000000;
+        int numGames = 0;
+        int totalGuessed = 0;
+
+        gameGreeting();
+       
+        while (response.equalsIgnoreCase("y")) {
+            numGames += 1;
+            int test = firstGame(console, random, bestGuess);
+            int best = Math.min(test, bestGuess);
+            totalGuessed += test;
+            bestGuess = best;
+            System.out.print("Do you want to play again? ");
+            response = console.next();
+            response = "" + response.charAt(0);
+            System.out.println();
+
+        }
+        overallResults(numGames, totalGuessed, bestGuess);            
+    }
+
+    //Prints greeting for program
+    public static void gameGreeting() {
+        System.out.println("Go ahead and guess a number");
+		System.out.println("I am thinking of between 1 and 100.");
+		System.out.println("If you get it right you get a special suprise");
+	    System.out.println();
+    }
+
+    //Goes through one game
+    //returns numbeer of guesses
+    //Parameters: 
+    //  Scanner Console: takes input
+    //  Random random: creates a random number
+    //  int bestGuess: fewest number of guesses from which 
+    //      you guess the right answer from the previous game
+    public static int firstGame(Scanner console, Random random, int bestGuess) {
+        System.out.println("I'm thinking of a number between 1 and " + MAX_VALUE + "...");
+        int randomNumber = random.nextInt(MAX_VALUE) + 1;
+        int numGuessed = 0;
+        int guess = 0;
+        while (randomNumber != guess) {
+            System.out.print("Your guess? ");
+            guess = console.nextInt();
+            numGuessed++;
+            if (guess < randomNumber){
+                System.out.println("It's higher.");
+            } else if (guess > randomNumber) {
+                System.out.println("It's lower.");
+            }
+        }    
+        System.out.print("You got it right in " + numGuessed);
+        if (numGuessed != 1) {
+            System.out.println(" guesses!");
+        }else {
+            System.out.println(" guess!");  
+        }
+        return numGuessed;
+    }  
+     
+    //Gives results after the ALL games played by the user
+    //Parameters: 
+    //  numGames: number of games played
+    //  numGuessed: number of guesses
+    //  bestGuess: fewest number of guesses from which 
+    //      you guess the right answer from the previous game
+    public static void overallResults(int numGames, int numGuessed, int bestGuess) {
+        System.out.println("Overall results:");
+		System.out.println("Total games   = " + numGames);
+		System.out.println("Total guesses = " + numGuessed);
+		System.out.println("Guesses/game  = " + round2((double)numGuessed/numGames));
+		System.out.println("Best game     = " + bestGuess);
+    }
+
+    //Rounds the calculated value to the tenths place (two decimal places)
+    public static double round2(double num) { 
+        return Math.round(num * 10.0) /10.0;
+    }
+}
