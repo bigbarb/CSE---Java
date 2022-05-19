@@ -1,0 +1,52 @@
+//the critter class of giant thats the color gray and for the 6 moves, it has 4 names.
+//the giant will infect if there is an enemy infront of it.
+//if no enemy is present to its front, it will hop. If none were the case, it would 
+//turn right
+
+import java.util.*;
+import java.awt.*;
+
+public class Giant extends Critter {
+    private int moving;
+
+    //constructs a new giant
+    public Giant() {
+        moving = 0;
+    }
+
+    //returns the color GRAY 
+    public Color getColor() {
+        return Color.GRAY;
+    }
+    
+    //returns the strings "fee", "fie", "foe", and "fum" for the 6 moves
+    //24 is from the 6 moves and the 4 names 6 * 4 = 24, name change
+    public String toString() {
+        if (moving % 24 < 6) {
+            return "fee";
+        } else if (moving % 24 < 12) {
+            return "fie";
+        } else if (moving % 24 < 18) {
+            return "foe";
+        } else {
+            return "fum";
+        }
+    }
+
+    //returns INFECT if there is an enemy infront of the giant.
+    //returns HOP if no enemy is in the front of the giant
+    //otherwise the giant will turn right.
+    //
+    //CritterInfo info - object used to provide information about the current
+    //status of the giant.
+    public Action getMove(CritterInfo info) {
+        moving++;
+        if (info.getFront() == Neighbor.OTHER) {
+            return Action.INFECT;
+        } else if (info.getFront() == Neighbor.EMPTY) {
+            return Action.HOP;
+        } else {
+            return Action.RIGHT;
+        }
+    }
+}
