@@ -1,0 +1,61 @@
+// A class to represent a Bear. If the the parameter is trule then the bear will
+// be white and if false its black. The bear will alternate each moves between 
+// a forward slash (starting) and back slash. If an enemy is infront, the bear will infect;
+// if not, the bear will hop infront if empty and anything else, it will turn to its left
+
+import java.util.*;
+import java.awt.*;
+
+public class Bear extends Critter {
+
+    private boolean polar;
+    private int moving;
+
+    //constructs a new bear
+    //Parameter:
+    public Bear(boolean polar) {
+        this.moving = 0;
+        this.polar = polar;
+    }
+
+    //Determines the color of the bear
+    //constructor accepts a parameter. When the parameter is true,
+    //the bear will be white and if the parameter is false, the
+    //resulting beat will be black
+    public Color getColor() {
+        if (this.polar) {
+            return Color.WHITE;
+        } else {
+            return Color.BLACK;
+        }
+    }
+
+    //The bear will alternate (move) between a forward slash and a backward slash
+    //it will start with a forward slash. If moving is divisble by 2 return the slash
+    //and if not return a black slash.
+    public String toString() {     
+        if (moving % 2 == 0) {
+            return "/";
+        } else {
+            return "\\";
+        }
+    }
+
+    //returns INFECT if there is an enemy infront of the bear.
+    //returns HOP if no enemy is in the front of the bear
+    //otherwise the giant will turn bear.
+    //
+    //CritterInfo info - object used to provide information about the current
+    //status of the bear.
+    public Action getMove(CritterInfo info) {
+        moving++;
+        if (info.getFront() == Neighbor.OTHER) {
+            return Action.INFECT;
+        } else if (info.getFront() == Neighbor.EMPTY) {
+            return Action.HOP;
+        } else {
+            return Action.LEFT;
+
+        }
+    } 
+}
