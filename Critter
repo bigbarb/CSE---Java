@@ -1,0 +1,40 @@
+//HUKSY
+//the critter class Husky that is blue and looks like brian T. The husky will turn right
+//if theres an enemy infront of the wall. It will return infect if a threat 
+//is present infront or behind it, otherwise it will infect it again.
+
+import java.util.*;
+import java.awt.*;
+
+public class Husky extends Critter {
+
+    //constructs new Husky
+    public Husky() {
+    }
+
+    //returns the color BLUE
+    public Color GetColor() {
+        return Color.BLUE;
+    }
+
+    //makes the critter husky "look" like brianT
+    public String toString() {
+        return "brianT";
+    }
+
+    //returns RIGHT if theres an enemy in the front in that direction of the wall 
+    //returns INFECT if theres a front or back threat present
+    //otherwise returns INFECT
+    //
+    //CritterInfo info - object used to provide information about the current
+    //status of the husky.
+    public Action getMove(CritterInfo info) {
+        if (info.getFront() == Neighbor.WALL) {
+            return Action.RIGHT;
+        } else if (info.frontThreat()|| info.backThreat()) {
+            return Action.INFECT;
+        } else {
+            return Action.INFECT;
+        } 
+    }
+}
