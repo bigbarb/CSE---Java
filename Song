@@ -1,0 +1,93 @@
+//This program will produce a song tittled "There Was an Old Woman Who Swallowed a Fly"
+
+public class Song {
+   
+   //main method (execution of program)
+   public static void main(String[] args) {
+      verse1Fly();
+      verse2Spider();
+      verse3Bird();
+	   verse4Cat();
+	   verse5Dog();
+	   verse6CustomVerse();
+	   verse7Horse();
+   }
+
+   //This method is for printing the line for verse 1
+   public static void verse1Fly() {
+      System.out.println("There was an old woman who swallowed a fly.");
+      last2LinesOfVerses();
+   }
+
+   //This method is for printing the line for verse 2   
+   public static void verse2Spider() {
+      System.out.println("There was an old woman who swallowed a spider,");
+      System.out.println("That wriggled and iggled and jiggled inside her."); 
+      spiderToFly();
+   }
+
+   //This method is for printing the line for verse 3  
+   public static void verse3Bird() {
+      System.out.println("There was an old woman who swallowed a bird,");
+      System.out.println("How absurd to swallow a bird.");
+      birdToSpider();
+   }
+
+   //This method is for printing the line for verse 4  
+   public static void verse4Cat() {
+      System.out.println("There was an old woman who swallowed a cat,");
+      System.out.println("Imagine that to swallow a cat.");
+      catToBird();
+   }
+
+   //This method is for printing the line for verse 5     
+   public static void verse5Dog() {
+      System.out.println("There was an old woman who swallowed a dog,");
+      System.out.println("What a hog to swallow a dog.");
+      dogToCat();
+   }
+
+   //This method is for printing the line for verse 6  
+   public static void verse6CustomVerse() {
+      System.out.println("There was an old woman who swallowed a baboon,");
+      System.out.println("why the baboon instead of the ballon,");
+      System.out.println("She swallowed the baboon to catch the bassoon,");
+      dogToCat();
+   }
+
+   //This method is for printing the line for verse 7   
+   public static void verse7Horse() {
+      System.out.println("There was an old woman who swallowed a horse,");
+      System.out.println("She died of course."); 
+   }
+   
+   //This method prints the last lines of every verse in the song
+   public static void last2LinesOfVerses() {
+      System.out.println("I don't know why she swallowed that fly,");
+      System.out.println("Perhaps she'll die.");
+      System.out.println();
+   }    
+
+   //This is the transition from spider to fly in the verse  
+   public static void spiderToFly() {
+      System.out.println("She swallowed the spider to catch the fly,");
+      last2LinesOfVerses();
+   }
+
+   //This is the transition from bird to spider in the verse  
+   public static void birdToSpider() {
+      System.out.println("She swallowed the bird to catch the spider,");
+      spiderToFly();
+   }
+
+   //This is the transition from cat to bird in the verse   
+   public static void catToBird() {
+      System.out.println("She swallowed the cat to catch the bird,");
+      birdToSpider();
+   }
+
+   //This is the transition from dog to cat   
+   public static void dogToCat() {
+      System.out.println("She swallowed the dog to catch the cat,");
+      catToBird();
+   
