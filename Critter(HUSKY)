@@ -1,4 +1,4 @@
-//HUKSY
+
 //the critter class Husky that is blue and looks like brian T. The husky will turn right
 //if theres an enemy infront of the wall. It will return infect if a threat 
 //is present infront or behind it, otherwise it will infect it again.
