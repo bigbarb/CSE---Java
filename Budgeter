@@ -1,0 +1,106 @@
+// This program will ask the user for their income 
+//and expenses to calculate their net monthly income
+//Additionally, it will determine if they are a saver or spender based on their net income range
+//And sort them into the following category’s big saver, saver, spender, or big spender
+
+import java.util.*;
+
+public class Budgeter {
+	
+	//Value of constant (approx num of days in a month)
+	public static final int DAYS_IN_MONTH = 31;
+	
+	//main method (execution of program)
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		
+		greeting();
+		double income = catIncome(input, "income");
+		double expenses = catIncome(input, "expense");
+		double netIncome = totalIncExp(income, expenses);
+		rangeCat(netIncome);
+	}
+	
+	//Greets the user upon using the program for budgeting
+	public static void greeting() {
+		System.out.println("This program asks for your monthly income and");
+		System.out.println("expenses, then tells you your net monthly income.");
+		System.out.println();
+	}
+	
+	//Takes Input and calculates the Income(s)
+	//Returns total income
+	//Parameters:
+	//	Scanner input - this allows input from the use, input is an instance of Scanner class
+	//	String incomeVsExpense - determines if it is calculating expense or income 
+	public static double catIncome(Scanner input, String incomeVsExpense) {
+		int typeOfExpense = 0;
+		if (incomeVsExpense == "expense") {
+			System.out.print("Enter 1) monthly or 2) daily expenses? ");
+			typeOfExpense = input.nextInt();
+		}
+		System.out.print("How many categories of " + incomeVsExpense + "? ");
+		int storeNum = input.nextInt();
+		double sum = 0.0;
+		for(int i = 0 ; i < storeNum; i++){
+			System.out.print( "    Next " + incomeVsExpense + " amount? $");
+			double income = input.nextDouble();
+			sum += income;
+		}
+		if (typeOfExpense == 2) {
+			sum = sum * DAYS_IN_MONTH;
+		}
+		System.out.println();
+		return sum;
+	}
+	
+	//Calculates Total Income & Expense; also the amount per day
+	//Parameters:
+	//	double catIncome - net income
+	//	double catExpenses - net expenses
+	public static double totalIncExp(double catIncome, double catExpenses) {
+		System.out.print("Total income = $" + round2(catIncome));
+		System.out.println(" ($" + round2(catIncome / DAYS_IN_MONTH) + "/day)");
+		System.out.print("Total expenses = $" + round2(catExpenses));
+		System.out.println(" ($" + round2(catExpenses / DAYS_IN_MONTH) + "/day)");
+		System.out.println();
+		double netIncome = catIncome - catExpenses;
+		return netIncome;		
+	}
+	
+	//Calculates Net Income and assigns the user a category based on spending or saving amount
+	//User is then placed into one: Big Saver, Saver, Spender, and Big Spender.
+	//Parameters:
+	//	double netIncome - net worth
+	public static void rangeCat(double netIncome) {
+		if (netIncome > 0) {
+			System.out.println("You earned $" + round2(netIncome) +
+				" more than you spent this month.");
+			if (netIncome > 250) {
+				System.out.println("You're a big saver.");
+				System.out.println("You're Securing that bag!");
+			} else {
+				System.out.println("You're a saver.");
+				System.out.println("Congrats! Keep filling up the bag!");
+			}
+			
+		} else {
+			System.out.println("You spent $" + round2(Math.abs(netIncome))
+				+ " more than you earned this month.");
+			if (netIncome > -250) {	
+				System.out.println("You're a spender.");
+				System.out.println("The bag has holes!");
+			}else {
+				System.out.println("You're a big spender.");
+				System.out.println("The bag has ripped!");
+			}
+		}
+	}
+	
+	//Rounds the calculated value to the hundreths place (two decimal places) and returns it
+	//Parameters:
+	//	double num - the number that is rounded
+	public static double round2(double num) {
+		return Math.round(num * 100.0) /100.0;
+	}
+}
