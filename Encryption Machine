@@ -1,0 +1,73 @@
+//This program will produce specified console output; Encrypting message for trasnsmission
+
+import java.util.*;
+
+public class EncryptionMachine {
+	//class constant for the alphabet
+	public static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+	//class constant for shifting
+	public static final int SHIFT = 3;
+	
+	//main method (execution of program)
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		hello();
+		encryptKey(input);
+		userInput(input);
+		lastLine();
+	}
+	
+	//Greets the user upon using the program
+	public static void hello() {
+		System.out.println("Welcome to the CSE142 Encryption Machine!");
+		System.out.println("The program lets you encrypt a message");
+		System.out.println("with a key so your recipient can decrypt.");
+		System.out.println();
+	}
+	
+	//Asks for the user to input a word to encrypt
+	//
+	//Scanner input - The Scanner to use for input
+	public static void encryptKey(Scanner input) {
+		System.out.println("Encrypted messages use a shared keyword to decrypt.");
+		System.out.print("  Enter key: ");
+		encryptMessage(input);
+		System.out.println();
+	}
+	
+	//Asks for the user input and loops *blank* times
+	//
+	//Scanner input - The Scanner to use for input
+	public static void userInput(Scanner input) {
+		System.out.print("How many words are in your message? ");
+		int storeNum = input.nextInt();
+		
+		for (int i = 0 ; i < storeNum; i++) {
+			System.out.print("  Next word: ");
+			encryptMessage(input);
+		}
+	}
+	
+	//Prints out the ending after encryption is complete
+	public static void lastLine() {
+		System.out.println();
+		System.out.println("Message fully encrypted. Happy secret messaging!");
+	}
+	
+	//Encrypts the message by shifting each letter in the given message by SHIFT
+	//
+	//Scanner input - The Scanner to use for input
+	public static void encryptMessage(Scanner input) {
+		String word = input.next();
+		String encryptWord = "";
+		
+		for(int i = 0 ; i < word.length(); i++) {
+			char cur = word.charAt(i);
+			int index = ALPHABET.indexOf(cur) + SHIFT;
+			index = index % ALPHABET.length();
+			char encryptChar = ALPHABET.charAt(index);
+			encryptWord += encryptChar;
+		}
+		System.out.println("    \"" + word + "\" has been encrypted to: " + encryptWord);
+	}
+}
