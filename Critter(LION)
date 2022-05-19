@@ -1,0 +1,72 @@
+//critter class lion changes its colors randomly for a set of three moves
+// the lion critter is represented/looks like an "L"
+// the lion will return infect if an enemy is present infront of It
+//otherwise, if a wall is present in the front or to the right of it, the lion
+//shall turn left. If another lion is in the front the current lion will turn right
+//otherwise it will hop.
+
+import java.util.*;
+import java.awt.*;
+
+public class Lion extends Critter {
+
+    private int moving;
+    private int rotatingColor;
+
+    //constructs new lion
+    //selects random color and counts the move of the lion
+    public Lion() {
+        moving = 0; 
+        Random rand = new Random();
+        rotatingColor = rand.nextInt(3) + 1;
+
+    }
+
+    //randomly picks the Color.RED, Color.GREEN, or Color.BLUE and use that
+    //color for the three moves. It will pick one of the colors again for the
+    //next three moves and so on. If rotatigColor == 1 color is red (return) and if
+    //rotatingColor == 2 color is blue (return)
+    public Color getColor() {
+        if (rotatingColor == 1) {
+            return Color.RED;
+        } else if (rotatingColor == 2) {
+            return Color.BLUE;
+        } else {
+            return Color.GREEN;
+        }
+    }
+
+    //makes the critter lion "look" like L
+    public String toString() {
+        return "L";
+    }
+
+    //using the randomly picked color for every three moves and then picks
+    // a random (red, green, or blue) again
+    //returns INFECT if an enemy is present in the front
+    //returns LEFT if a wall is present in the front or to the right
+    //returns RIGHT if a fellow lion is infront of the current lion
+    //returns HOP if fellow lion isnt present
+    //
+    //CritterInfo info - object used to provide information about the current
+    //status of the lion
+    public Action getMove(CritterInfo info) {
+        moving++;
+        Random rand = new Random();
+        if (moving >= 3) {
+            moving = 0; 
+        }
+        if (moving == 0) {
+            rotatingColor = rand.nextInt(3) + 1;
+        }
+        if (info.getFront() == Neighbor.OTHER) {
+            return Action.INFECT;
+        } else if (info.getFront() == Neighbor.WALL || info.getRight() == Neighbor.WALL) {
+            return Action.LEFT;
+        } else if (info.getFront() == Neighbor.SAME) {
+            return Action.RIGHT;
+        } else {
+            return Action.HOP;
+        }
+    }
+}
