@@ -1,3 +1,10 @@
+//This program gives a user three menu options: Create (C), View (V), or Quit (Q) a madlib.
+//If the user decides to create a madlib, the program will ask 
+//the user for an input/output file names. The program reads the inputted file 
+//from the user and prompts them to fill in the placeholders (Adjective, noun, verb, etc.)
+//without showing the story; as this is happening, the program writes the resulting text to 
+//the output file which the user can view. The user can also quit if desired.
+
 import java.io.*;
 import java.util.*;
 
